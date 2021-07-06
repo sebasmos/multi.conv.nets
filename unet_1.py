@@ -4,6 +4,8 @@
 
 """
 import tensorflow as tf
+from tensorflow._api.v1.keras import callbacks
+
 
 def simple_unet_model(IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS):
 #Build the model
@@ -66,6 +68,3 @@ def simple_unet_model(IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS):
     model.summary()
     
     return model
-
-# Testing for different sizes.
-simple_unet_model(128, 128, 3)
