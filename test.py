@@ -1,5 +1,5 @@
 from tensorflow.python.keras.backend import dtype
-from unet_1 import simple_unet_model
+from models.unet_1 import unet_truncated
 import os
 import tensorflow as tf
 import numpy as np
@@ -63,7 +63,7 @@ plt.show()
 imshow(np.squeeze(Y_train[image_x]))
 plt.show()
 
-model = simple_unet_model(img_height, img_width, ch)
+model = unet_truncated(img_height, img_width, ch)
 
 #Modelcheckpoint
 checkpointer = tf.keras.callbacks.ModelCheckpoint('model_ch.h5', verbose=1, save_best_only=True)
