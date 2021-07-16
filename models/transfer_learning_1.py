@@ -19,6 +19,12 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping, TensorBoard
 
 
+img_rows = 0
+
+img_cols = 0
+
+img_bands = 0
+
 def models(IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS,num_classes):
 
     use_vgg = True

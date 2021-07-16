@@ -1,5 +1,5 @@
 from tensorflow.python.keras.backend import dtype
-from models.unets import unet_bin, unet_satellite
+from models.unets import unet_bin, unet_satellite, unet_bin_jaccard_index
 import os
 import tensorflow as tf
 import numpy as np
