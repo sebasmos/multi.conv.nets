@@ -1,4 +1,7 @@
-# -*- coding: utf-8 -*-
+"""
+@author: Sebastian Cajas
+ 
+"""
 
 
 import rasterio

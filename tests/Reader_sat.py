@@ -1,6 +1,16 @@
-# -*- coding: utf-8 -*-
-# pip install imagecodecs & rasterio
+"""
+@author: Sebastian Cajas
+ 
+Read satellite images and split into patches
 
+
+!pip install geopandas
+!pip install rasterio
+!pip install patchify
+!pip install imagecodecs
+!pip install imagecodecs --force
+
+"""
 
 import numpy as np
 from matplotlib import pyplot as plt

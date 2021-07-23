@@ -1,3 +1,9 @@
+"""
+@author: Sebastian Cajas
+ 
+ Loss functions multi-class image segmentation 
+"""
+
 from keras import backend as K
 import tensorflow as tf
 
