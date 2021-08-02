@@ -11,22 +11,31 @@ Read satellite images and split into patches
 !pip install imagecodecs --force
 
 """
+'''
+Use for 1 band images
+'''
 
-import numpy as np
-from matplotlib import pyplot as plt
-from patchify import patchify
 import tifffile as tiff
 
-def cutter(path_image, path_label,path_out):
+
+def cutter_multidimensional(path_image, path_label,path_out):
+    
     large_image_stack = tiff.imread(path_image)
     large_mask_stack = tiff.imread(path_label)
 
-    large_image = large_image_stack[:,:] # Select desired number of bands
-    patches_img = patchify(large_image, (128, 128), step=128)  #Step=256 for 256 patches means no overlap
+    large_image = large_image_stack[:,:,:]
+    patches_img = patchify(large_image, (128, 128, 8), step=128)  #Step=256 for 256 patches means no overlap
+    #patches_img2 = patchify(large_image, (128, 128), step=128)  #Step=256 for 256 patches means no overlap
+    patches_img = np.squeeze(patches_img)
+
+    print(patches_img.shape)
+    #print(patches_img2.shape)
+
 
     for i in range(patches_img.shape[0]):
         for j in range(patches_img.shape[1]):
             single_patch_img = patches_img[i,j,:,:]
+            #print(single_patch_img.shape)
             tiff.imwrite(path_out + '/patches/images/' + 'image_' + '_' + str(i)+str(j)+ ".tif", single_patch_img)
 
 
@@ -46,12 +55,16 @@ def cutter_unidimensional(path_image, path_label,path_out):
     large_image_stack = tiff.imread(path_image)
     large_mask_stack = tiff.imread(path_label)
 
-    large_image = large_image_stack[:,:,:]
+    large_image = large_image_stack[:,:,1]  # need to indicate which band want to use
     patches_img = patchify(large_image, (128, 128), step=128)  #Step=256 for 256 patches means no overlap
+    
+    print(patches_img.shape)
+
 
     for i in range(patches_img.shape[0]):
         for j in range(patches_img.shape[1]):
             single_patch_img = patches_img[i,j,:,:]
+            #print(single_patch_img.shape)
             tiff.imwrite(path_out + '/patches/images/' + 'image_' + '_' + str(i)+str(j)+ ".tif", single_patch_img)
 
 
@@ -66,4 +79,3 @@ def cutter_unidimensional(path_image, path_label,path_out):
             single_patch_mask = patches_mask[i,j,:,:]
             tiff.imwrite(path_out +'/patches/masks/' + 'mask_' + '_' + str(i)+str(j)+ ".tif", single_patch_mask)
             single_patch_mask = single_patch_mask / 255.
-
